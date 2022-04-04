@@ -34,7 +34,6 @@ const StyledStudent = styled.li`
     }
   }
 
-
     .student-links {
       justify-content: flex-start;
       margin-left: 0;
@@ -81,7 +80,7 @@ const StyledStudent = styled.li`
 
   .student-overline {
     margin: 10px 0;
-    color: var(--green);
+    color: #ce93d8;
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
     font-weight: 400;
@@ -104,6 +103,7 @@ const StyledStudent = styled.li`
         &:before {
           content: '';
           display: block;
+          align-items: center;
           position: absolute;
           z-index: 0;
           width: 100%;
@@ -120,20 +120,7 @@ const StyledStudent = styled.li`
     position: relative;
     z-index: 2;
     padding: 25px;
-    border-radius: var(--border-radius);
-    background-color: var(--light-navy);
-    color: var(--light-slate);
-    font-size: var(--fz-lg);
-
-    @media (max-width: 768px) {
-      padding: 20px 0;
-      background-color: transparent;
-      box-shadow: none;
-
-      &:hover {
-        box-shadow: none;
-      }
-    }
+    border-radius: 100%;
 
     a {
       ${({ theme }) => theme.mixins.inlineLink};
@@ -156,7 +143,7 @@ const StyledStudent = styled.li`
 
     li {
       margin: 0 20px 5px 0;
-      color: var(--light-slate);
+      color: #ce93d8;
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
       white-space: nowrap;
@@ -172,8 +159,7 @@ const StyledStudent = styled.li`
     }
   }
 
-  .project-image {
-    ${({ theme }) => theme.mixins.boxShadow};
+  .student-image {
     grid-column: 6 / -1;
     grid-row: 1 / -1;
     position: relative;
@@ -186,11 +172,9 @@ const StyledStudent = styled.li`
     }
 
     a {
-      width: 100%;
-      height: 100%;
-      background-color: var(--green);
-      border-radius: var(--border-radius);
-      vertical-align: middle;
+      background-color: #ce93d8;
+      border-radius: 100%;
+      border 1px solid grey;
 
       &:hover,
       &:focus {
@@ -201,6 +185,7 @@ const StyledStudent = styled.li`
         .img {
           background: transparent;
           filter: none;
+
         }
       }
 
@@ -215,18 +200,17 @@ const StyledStudent = styled.li`
         bottom: 0;
         z-index: 3;
         transition: var(--transition);
-        background-color: var(--navy);
         mix-blend-mode: screen;
       }
     }
 
     .img {
-      border-radius: var(--border-radius);
+      border-radius: 100%;
       mix-blend-mode: multiply;
       filter: grayscale(100%) contrast(1) brightness(90%);
 
       @media (max-width: 768px) {
-        object-fit: cover;
+        object-fit: contain;
         width: auto;
         height: 100%;
         filter: grayscale(100%) contrast(1) brightness(50%);
@@ -281,9 +265,9 @@ function Students() {
                       {firstName} {lastName}
                     </h3>
 
-                    <div className="project-image">
+                    <div className="student-image">
                       <a>
-                        <img className="img" src={pic} alt="Headshot" />
+                        <img className="" src={pic} alt="Headshot" />
                       </a>
                     </div>
 

@@ -63,8 +63,8 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--navy);
-    color: var(--slate);
+    background-color: #e3f2fd;
+    color: #42a5f5;
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
     line-height: 1.3;
@@ -154,7 +154,7 @@ const GlobalStyle = createGlobalStyle`
   h6 {
     margin: 0 0 10px 0;
     font-weight: 600;
-    color: var(--lightest-slate);
+    color: #42a5f5;
     line-height: 1.1;
   }
 
@@ -183,7 +183,7 @@ const GlobalStyle = createGlobalStyle`
       counter-increment: section;
       content: '0' counter(section) '.';
       margin-right: 10px;
-      color: var(--green);
+      color: #42a5f5;
       font-family: var(--font-mono);
       font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
       font-weight: 400;
@@ -202,7 +202,7 @@ const GlobalStyle = createGlobalStyle`
       width: 300px;
       height: 1px;
       margin-left: 20px;
-      background-color: var(--green);
+      background-color: #42a5f5;
 
       @media (max-width: 1080px) {
         width: 200px;
@@ -218,8 +218,8 @@ const GlobalStyle = createGlobalStyle`
 
   img,
   svg {
-    height: 200px;
-    width: 50%;
+    height: 150px;
+    width: 150px;
     border-radius: 100%;
     max-width: 100%;
     vertical-align: left;
@@ -243,6 +243,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     display: inline-block;
+    border-radius: 100%;
     text-decoration: none;
     text-decoration-skip-ink: auto;
     color: inherit;
@@ -256,6 +257,7 @@ const GlobalStyle = createGlobalStyle`
 
     &.inline-link {
       ${({ theme }) => theme.mixins.inlineLink};
+      border-radius: 100%;
     }
   }
 
@@ -308,14 +310,14 @@ const GlobalStyle = createGlobalStyle`
           content: '▹';
           position: absolute;
           left: 0;
-          color: var(--green);
+          color: #42a5f5;
         }
       }
     }
   }
 
   blockquote {
-    border-left-color: var(--green);
+    border-left-color: #42a5f5;
     border-left-style: solid;
     border-left-width: 1px;
     margin-left: 0px;
@@ -341,14 +343,14 @@ const GlobalStyle = createGlobalStyle`
 
 
   .overline {
-    color: var(--green);
+    color: #42a5f5;
     font-family: var(--font-mono);
     font-size: var(--fz-md);
     font-weight: 400;
   }
 
   .subtitle {
-    color: var(--green);
+    color: #42a5f5;
     margin: 0 0 20px 0;
     font-size: var(--fz-md);
     font-family: var(--font-mono);
@@ -364,15 +366,11 @@ const GlobalStyle = createGlobalStyle`
     a {
       ${({ theme }) => theme.mixins.inlineLink};
       line-height: 1.5;
+      border-radius: 100%;
     }
   }
 
-
-
-
   ${TransitionStyles};
-
-
 `;
 
 export default GlobalStyle;
