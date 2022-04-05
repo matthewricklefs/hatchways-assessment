@@ -4,7 +4,7 @@
 }
 
 .search input {
-  color: #42a5f5;
+  color: lightgrey;
   background-color: transparent;
   border: 0;
   border-bottom: 1px solid lightgrey;
@@ -30,21 +30,7 @@ input:focus {
 }
 
 .searchIcon svg {
-  font-size: 35px;
-}
-
-.dataResult {
-  margin-top: 5px;
-  width: 300px;
-  height: 200px;
-  background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  overflow: hidden;
-  overflow-y: auto;
-}
-
-.dataResult::-webkit-scrollbar {
-  display: none;
+  font-size: 30px;
 }
 
 .dataResult .dataItem {

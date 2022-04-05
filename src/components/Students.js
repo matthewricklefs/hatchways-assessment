@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Accordion from './Accordion';
+import Tags from './Tags';
 
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
@@ -224,8 +225,9 @@ const StyledStudent = styled.li`
   }
 `;
 
-function Students({ placeholder }) {
+function Students() {
   const [students, getStudents] = useState([]);
+
   const [filter, setFilter] = useState([]);
   const [wordEntered, setWordEntered] = useState('');
 
@@ -260,6 +262,8 @@ function Students({ placeholder }) {
     setWordEntered('');
   };
 
+  const selectedTags = (tags) => tags;
+
   useEffect(() => {
     fetchStudents();
   }, []);
@@ -267,10 +271,11 @@ function Students({ placeholder }) {
   return (
     <>
       <div className="search">
+        {/* Search Input */}
         <div className="searchInputs">
           <input
             type="text"
-            placeholder="Search our students by name"
+            placeholder="Search by name"
             value={wordEntered}
             onChange={handleFilter}
           />
@@ -283,6 +288,7 @@ function Students({ placeholder }) {
           </div>
         </div>
 
+        {/* Students */}
         {filter.length !== 0 && (
           <div>
             {filter.slice(0, 15).map((val, i) => {
@@ -318,7 +324,11 @@ function Students({ placeholder }) {
                         {val.skill}
                       </h6>
 
+                      {/* Grades List */}
                       <Accordion data={val.grades} index={i} />
+
+                      {/* Tag Input */}
+                      <Tags selectedTags={selectedTags} index={i} />
                     </div>
                   </div>
                 </StyledStudent>
@@ -355,7 +365,7 @@ function Students({ placeholder }) {
 
                       <div className="student-image">
                         <a>
-                          <img className="" src={pic} alt="Headshot" />
+                          <img src={pic} alt="Headshot" />
                         </a>
                       </div>
 
