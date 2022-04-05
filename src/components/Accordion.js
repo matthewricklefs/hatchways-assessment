@@ -22,9 +22,11 @@ function Accordion({ data, index }) {
   return (
     <div className="accordion__section">
       <div>
-        <button className={`accordion ${active}`} onClick={toggleAccordion}>
-          <p className="accordion__title">{data.title}</p>
-          <Chevron className={`${rotate}`} width={10} fill={'#777'} />
+        <button
+          className={`accordion ${active} button`}
+          onClick={toggleAccordion}
+        >
+          <Chevron className={`${rotate}`} width={40} fill={'#777'} />
         </button>
 
         <div
@@ -32,17 +34,14 @@ function Accordion({ data, index }) {
           style={{ maxHeight: `${height}` }}
           className="accordion__content"
         >
-          <div className="accordion__text" key={index}>
-            <a
-              className="dataItem"
-              href={data.link}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <p>
-                {data.author === 'Unknown' ? 'Unknown Author' : data.author}{' '}
-              </p>
-            </a>
+          <div className="student-overline">
+            <ul className="student-grade-list">
+              {data.map((grade, i) => (
+                <li key={index}>
+                  <span>Test {i}:</span> {grade}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

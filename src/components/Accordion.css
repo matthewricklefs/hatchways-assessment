@@ -1,13 +1,15 @@
 .accordion__section {
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
+  align-items: flex-start;
+  justify-content: space-around;
 }
 
 .accordion {
-  background-color: #eee;
+  background-color: transparent;
   color: #444;
   cursor: pointer;
-  padding: 18px;
+  padding: 10px;
   display: flex;
   align-items: center;
   border: none;
@@ -17,7 +19,7 @@
 
 .accordion:hover,
 .active {
-  background-color: #ccc;
+  background-color: transparent;
 }
 
 .accordion__title {
@@ -36,7 +38,7 @@
 }
 
 .accordion__content {
-  background-color: white;
+  background-color: transparent;
   overflow: hidden;
   transition: max-height 0.6 ease;
 }

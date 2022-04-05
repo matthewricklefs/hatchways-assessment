@@ -4,21 +4,23 @@
 }
 
 .search input {
-  background-color: white;
+  color: #42a5f5;
+  background-color: transparent;
   border: 0;
+  border-bottom: 1px solid lightgrey;
   border-radius: 2px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   font-size: 18px;
   padding: 15px;
   height: 30px;
-  width: 300px;
+  width: 100%;
 }
 
 .searchIcon {
-  height: 60px;
+  height: 30px;
   width: 50px;
-  background-color: white;
+  background-color: transparent;
   display: grid;
   place-items: center;
 }
@@ -35,7 +37,7 @@ input:focus {
   margin-top: 5px;
   width: 300px;
   height: 200px;
-  background-color: white;
+  background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
   overflow-y: auto;
@@ -50,7 +52,7 @@ input:focus {
   height: 50px;
   display: flex;
   align-items: center;
-  color: black;
+  color: lightgrey;
 }
 
 .dataItem p {

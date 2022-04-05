@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Accordion from './Accordion';
+
+import SearchIcon from '@material-ui/icons/Search';
+import CloseIcon from '@material-ui/icons/Close';
+
 import styled from 'styled-components';
-import SearchBar from '../components/SearchBar';
+import './SearchBar.css';
 
 const StyledStudentsGrid = styled.ul`
   ${({ theme }) => theme.mixins.resetList};
@@ -219,8 +224,11 @@ const StyledStudent = styled.li`
   }
 `;
 
-function Students() {
+function Students({ placeholder }) {
   const [students, getStudents] = useState([]);
+  const [filter, setFilter] = useState([]);
+  const [wordEntered, setWordEntered] = useState('');
+
   const API = 'https://api.hatchways.io/assessment/students';
 
   const fetchStudents = () => {
@@ -232,79 +240,160 @@ function Students() {
       });
   };
 
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+
+    const newFilter = students.filter((student) => {
+      return student.firstName.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === '') {
+      setFilter([]);
+    } else {
+      setFilter(newFilter);
+    }
+  };
+
+  const clearInput = () => {
+    setFilter([]);
+    setWordEntered('');
+  };
+
   useEffect(() => {
     fetchStudents();
   }, []);
 
   return (
     <>
-      <h2 className="big-heading">Our Students</h2>
+      <div className="search">
+        <div className="searchInputs">
+          <input
+            type="text"
+            placeholder="Search our students by name"
+            value={wordEntered}
+            onChange={handleFilter}
+          />
+          <div className="searchIcon">
+            {filter.length === 0 ? (
+              <SearchIcon />
+            ) : (
+              <CloseIcon id="clearBtn" onClick={clearInput} />
+            )}
+          </div>
+        </div>
 
-      <SearchBar placeholder="Search Our Students by Name" data={students} />
+        {filter.length !== 0 && (
+          <div>
+            {filter.slice(0, 15).map((val, i) => {
+              return (
+                <StyledStudent key={i}>
+                  <div className="">
+                    <div className="student-content">
+                      <h3 className="numbered-heading">
+                        {val.firstName} {val.lastName}
+                      </h3>
 
-      <StyledStudentsGrid>
-        {students &&
-          students.map((node, i) => {
-            console.log(node);
-            const {
-              city,
-              company,
-              email,
-              firstName,
-              lastName,
-              grades,
-              skill,
-              pic,
-            } = node;
+                      <div className="student-image">
+                        <img className="" src={val.pic} alt="Headshot" />
+                      </div>
 
-            return (
-              <StyledStudent key={i}>
-                <div className="student-content">
-                  <div>
-                    <h3 className="numbered-heading">
-                      {firstName} {lastName}
-                    </h3>
+                      <p className="student-overline">
+                        <span className="student-overline">Email: </span>
+                        {val.email}
+                      </p>
 
-                    <div className="student-image">
-                      <a>
-                        <img className="" src={pic} alt="Headshot" />
-                      </a>
+                      <h4>
+                        <span className="student-overline">City: </span>
+                        {val.city}
+                      </h4>
+
+                      <h5>
+                        <span className="student-overline">Company: </span>
+                        {val.company}
+                      </h5>
+
+                      <h6>
+                        <span className="student-overline">Skill: </span>
+                        {val.skill}
+                      </h6>
+
+                      <Accordion data={val.grades} index={i} />
                     </div>
-
-                    <p className="student-overline">
-                      <span className="student-overline">Email: </span>
-                      {email}
-                    </p>
-
-                    <h4>
-                      <span className="student-overline">City: </span>
-                      {city}
-                    </h4>
-
-                    <h5>
-                      <span className="student-overline">Company: </span>
-                      {company}
-                    </h5>
-
-                    <h6>
-                      <span className="student-overline">Skill: </span>
-                      {skill}
-                    </h6>
-
-                    {grades.length && (
-                      <ul className="student-grade-list">
-                        <li>Grades: </li>
-                        {grades.map((grade, i) => (
-                          <li key={i}>{grade}</li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
-                </div>
-              </StyledStudent>
-            );
-          })}
-      </StyledStudentsGrid>
+                </StyledStudent>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {filter.length !== 0 ? (
+        ''
+      ) : (
+        <StyledStudentsGrid>
+          {students &&
+            students.map((node, i) => {
+              const {
+                city,
+                company,
+                email,
+                firstName,
+                lastName,
+                grades,
+                skill,
+                pic,
+              } = node;
+
+              return (
+                <StyledStudent key={i}>
+                  <div className="student-content">
+                    <div>
+                      <h3 className="numbered-heading">
+                        {firstName} {lastName}
+                      </h3>
+
+                      <div className="student-image">
+                        <a>
+                          <img className="" src={pic} alt="Headshot" />
+                        </a>
+                      </div>
+
+                      <p className="student-overline">
+                        <span className="student-overline">Email: </span>
+                        {email}
+                      </p>
+
+                      <h4>
+                        <span className="student-overline">City: </span>
+                        {city}
+                      </h4>
+
+                      <h5>
+                        <span className="student-overline">Company: </span>
+                        {company}
+                      </h5>
+
+                      <h6>
+                        <span className="student-overline">Skill: </span>
+                        {skill}
+                      </h6>
+
+                      {grades.length && (
+                        <ul className="student-grade-list">
+                          <li>Grades: </li>
+                          {grades.map((grade, i) => (
+                            <li key={i}>{grade}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                </StyledStudent>
+              );
+            })}
+        </StyledStudentsGrid>
+      )}
     </>
   );
 }
