@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import CloseIcon from '@material-ui/icons/Close';
+
+import './Tags.css';
 
 const TagsInput = (props) => {
   const [tags, setTags] = useState([]);
@@ -11,17 +14,28 @@ const TagsInput = (props) => {
     }
   };
 
+  const removeTag = (removedTag) => {
+    const newTags = tags.filter((tag) => tag !== removedTag);
+    setTags(newTags);
+  };
+
   console.log(props);
 
   return (
     <div className="tags-input">
       <div className="tag-container">
         {tags.map((tag, index) => (
-          <span className="tag" key={index}>
+          <div className="tag" key={index}>
             {tag}
-          </span>
+            <span>
+              <CloseIcon onClick={() => removeTag(tag)} />
+            </span>
+          </div>
         ))}
       </div>
+
+      <br />
+
       <input
         id="tag-filter"
         type="text"

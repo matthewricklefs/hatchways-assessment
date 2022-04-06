@@ -368,6 +368,8 @@ const GlobalStyle = createGlobalStyle`
       line-height: 1.5;
       border-radius: 100%;
     }
+
+
   }
 
   ${TransitionStyles};
