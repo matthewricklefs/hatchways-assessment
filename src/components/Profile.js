@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import Tag from './Tag';
 import Accordion from './Accordion';
 
@@ -225,14 +227,18 @@ const StyledStudent = styled.li`
   }
 `;
 
-function Profile({
-  students,
-  filteredStudents,
-  onChange,
-  onKeyPress,
-  tags,
-  tag,
-}) {
+function Profile({ students, filteredStudents, onTagAdded, studentIndex }) {
+  const [tags, setTags] = useState([]);
+  const [tag, setTag] = useState('');
+
+  const handleTagKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      setTags((previousTags) => [...previousTags].push(tag));
+      setTag('');
+      onTagAdded(tag, studentIndex);
+      // event.target.value = '';
+    }
+  };
   return (
     <StyledStudentsGrid>
       {students
@@ -241,8 +247,8 @@ function Profile({
             student.firstName.toLowerCase().includes(filteredStudents) ||
             student.lastName.toLowerCase().includes(filteredStudents)
         )
-        .map((student) => (
-          <StyledStudent>
+        .map((student, index) => (
+          <StyledStudent key={index}>
             <div className="student-content">
               <h3 className="numbered-heading">
                 {student.firstName} {student.lastName}
@@ -272,11 +278,11 @@ function Profile({
                 {student.skill}
               </h6>
 
-              <Accordion data={student.grades} />
+              <Accordion key={index} data={student.grades} />
 
               <Tag
-                onChange={onChange}
-                onKeyPress={onKeyPress}
+                onChange={(e) => setTag(e.target.value)}
+                onKeyPress={handleTagKeyPress}
                 tags={tags}
                 tag={tag}
               />

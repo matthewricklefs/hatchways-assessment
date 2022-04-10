@@ -6,20 +6,21 @@ import Profile from './components/Profile';
 function App() {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
-
-  const [tags, setTags] = useState([]);
-  const [tag, setTag] = useState('');
-
   const [search, setSearch] = useState('');
 
-  const handleTagChange = (e) => setTag(e.target.value);
+  const handleTagAdded = (tag, index) => {
+    setStudents((prevStudents) => {
+      const changedStudent = { ...prevStudents[index] };
 
-  const handleTagKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      setTags((previousTags) => previousTags.push(tag));
-      setTag('');
-      // event.target.value = '';
-    }
+      if (!('tags' in changedStudent)) {
+        changedStudent.tags = [];
+      }
+      changedStudent.tags.push(tag);
+
+      const mutatableStudents = [...prevStudents];
+      mutatableStudents[index] = changedStudent;
+      return mutatableStudents;
+    });
   };
 
   const API = 'https://api.hatchways.io/assessment/students';
@@ -37,16 +38,25 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // Array.filter() is perfect for this situation //
     const filteredStudentsByNameAndTag = students.filter((student) => {
       const firstName = student.firstName.toLowerCase();
       const lastName = student.lastName.toLowerCase();
       const fullName = firstName + lastName;
 
-      return fullName.includes(search.toLowerCase()) && student.tag === tag;
+      if ('tags' in student) {
+        // You can now do whatever filtering you need to do based on tags
+        let comparedTag = student.tag === 'tags';
+        return comparedTag;
+      }
+
+      let comparedTag;
+
+      return fullName.includes(search.toLowerCase()) && comparedTag;
     });
 
     setFilteredStudents(filteredStudentsByNameAndTag);
-  }, [search]);
+  }, [search, students]);
 
   return (
     <div>
@@ -56,27 +66,15 @@ function App() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {search.length === 0 && (
-        <Profile
-          students={students}
-          filteredStudents={filteredStudents}
-          onChange={handleTagChange}
-          onKeyPress={handleTagKeyPress}
-          tag={tag}
-          tags={tags}
-        />
-      )}
+      {/* {search.length === 0 && <Profile students={students} />} */}
 
       {search.length !== 0 && (
         <div>
-          {filteredStudents.map((student) => (
+          {filteredStudents.map((student, index) => (
             <Profile
-              students={student}
-              filteredStudents={filteredStudents}
-              onChange={handleTagChange}
-              onKeyPress={handleTagKeyPress}
-              tag={tag}
-              tags={tags}
+              students={students[student]}
+              onTagAdded={handleTagAdded}
+              studentIndex={index}
             />
           ))}
         </div>
