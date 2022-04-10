@@ -2,22 +2,22 @@ import './SearchBar.css';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
 
-function SearchBar({ placeholder, onChange, wordEntered, clearInput }) {
+function TagBar({ placeholder, onChange, tagEntered, clearTagInput }) {
   return (
     <div className="search">
       <div className="searchInputs">
         <input
           type="text"
           placeholder={placeholder}
-          value={wordEntered}
+          value={tagEntered}
           onChange={onChange}
         />
 
         <div className="searchIcon">
-          {wordEntered.length === 0 ? (
+          {tagEntered.length === 0 ? (
             <SearchIcon />
           ) : (
-            <CloseIcon id="clearBtn" onClick={clearInput} />
+            <CloseIcon id="clearBtn" onClick={clearTagInput} />
           )}
         </div>
       </div>
@@ -25,4 +25,4 @@ function SearchBar({ placeholder, onChange, wordEntered, clearInput }) {
   );
 }
 
-export default SearchBar;
+export default TagBar;

@@ -227,7 +227,7 @@ const StyledStudent = styled.li`
   }
 `;
 
-function Profile({ students, filteredStudents, onTagAdded, studentIndex }) {
+function Profile({ students, onTagAdded, studentIndex }) {
   const [tags, setTags] = useState([]);
   const [tag, setTag] = useState('');
 
@@ -239,13 +239,14 @@ function Profile({ students, filteredStudents, onTagAdded, studentIndex }) {
       // event.target.value = '';
     }
   };
+
   return (
     <StyledStudentsGrid>
       {students
         .filter(
           (student) =>
-            student.firstName.toLowerCase().includes(filteredStudents) ||
-            student.lastName.toLowerCase().includes(filteredStudents)
+            student.firstName.toLowerCase().includes(students) ||
+            student.lastName.toLowerCase().includes(students)
         )
         .map((student, index) => (
           <StyledStudent key={index}>

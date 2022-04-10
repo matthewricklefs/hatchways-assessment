@@ -1,5 +1,5 @@
 import Accordion from './Accordion';
-import SearchBar from './SearchBar';
+import SearchBar from './TagBar';
 import Tag from './Tag';
 import Profile from './Profile';
 
