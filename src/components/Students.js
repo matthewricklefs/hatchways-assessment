@@ -2,7 +2,6 @@ import Accordion from './Accordion';
 import Tag from './Tag';
 import TagSubmit from './TagSubmit';
 import styled from 'styled-components';
-import './Tag.css';
 
 const StyledStudentsGrid = styled.ul`
   ${({ theme }) => theme.mixins.resetList};
@@ -11,14 +10,21 @@ const StyledStudentsGrid = styled.ul`
     position: relative;
     z-index: 1;
   }
+
+  display: grid;
+  grid-template-columns: min-content 33% 1fr 1fr 1fr;
+  grid-template-rows: min-content, 1fr 1fr;
+  grid-gap: 10px;
+  grid-template-areas:
+    'avatar name name name expandBtn'
+    'avatar content content . .'
+    '. content content . .';
+  padding: 16px;
+  border-bottom: 1px solid lightgrey;
 `;
 
 const StyledStudent = styled.li`
-  position: relative;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(12, 1fr);
-  align-items: center;
+  ${({ theme }) => theme.mixins.flexCenter};
 
   @media (max-width: 768px) {
     ${({ theme }) => theme.mixins.boxShadow};
@@ -68,7 +74,7 @@ const StyledStudent = styled.li`
     @media (max-width: 768px) {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       height: 100%;
       grid-column: 1 / -1;
       padding: 40px 40px 30px;
@@ -78,6 +84,7 @@ const StyledStudent = styled.li`
     @media (max-width: 480px) {
       padding: 30px 25px 20px;
     }
+
   }
 
   .student-overline {
@@ -242,7 +249,9 @@ function Students({
               <h3 className="numbered-heading">
                 {firstName} {lastName}
               </h3>
+            </>
 
+            <>
               <div className="student-image">
                 <img className="" src={img} alt="Headshot" />
               </div>
@@ -261,12 +270,10 @@ function Students({
                 <span className="student-overline">Skill: </span>
                 {skill}
               </h6>
-            </>
 
-            <div className="student-content">
               <Accordion grades={grades} />
 
-              <>
+              <div>
                 {tags.length > 0
                   ? tags.map((tag, index) => {
                       return <Tag key={index.toString()} tag={tag} />;
@@ -274,8 +281,8 @@ function Students({
                   : null}
 
                 <TagSubmit index={index} addTag={addTag} />
-              </>
-            </div>
+              </div>
+            </>
           </div>
         </StyledStudent>
       </StyledStudentsGrid>

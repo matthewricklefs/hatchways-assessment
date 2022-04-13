@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import Students from './components/Students';
@@ -112,38 +113,40 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <SearchBar
-        placeholder="Search by name"
-        onChange={(e) => setFilteredData(e.target.value)}
-        filteringFunc={filteredStudent}
-        type={`name`}
-      />
+    <div className="App">
+      <div className="contentContainer">
+        <SearchBar
+          placeholder="Search by name"
+          onChange={(e) => setFilteredData(e.target.value)}
+          filteringFunc={filteredStudent}
+          type={`name`}
+        />
 
-      <SearchBar
-        placeholder="Search by tag"
-        onChange={(e) => setFilteredData(e.target.value)}
-        filteringFunc={filteredTag}
-        type={`tag`}
-      />
+        <SearchBar
+          placeholder="Search by tag"
+          onChange={(e) => setFilteredData(e.target.value)}
+          filteringFunc={filteredTag}
+          type={`tag`}
+        />
 
-      {filteredData.map((student, index) => {
-        return (
-          <Students
-            key={index.toString()}
-            index={index}
-            img={student.pic}
-            firstName={student.firstName}
-            lastName={student.lastName}
-            email={student.email}
-            company={student.company}
-            skill={student.skill}
-            grades={student.grades}
-            tags={student.tags}
-            addTag={addTag}
-          />
-        );
-      })}
+        {filteredData.map((student, index) => {
+          return (
+            <Students
+              key={index.toString()}
+              index={index}
+              img={student.pic}
+              firstName={student.firstName}
+              lastName={student.lastName}
+              email={student.email}
+              company={student.company}
+              skill={student.skill}
+              grades={student.grades}
+              tags={student.tags}
+              addTag={addTag}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

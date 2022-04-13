@@ -16,24 +16,14 @@ const GlobalStyle = createGlobalStyle`
   *:after {
     box-sizing: inherit;
   }
-
   ::selection {
     background-color: var(--lightest-navy);
     color: var(--lightest-slate);
   }
-
-  /* Provide basic, default focus styles.*/
   :focus {
     outline: 2px dashed var(--green);
     outline-offset: 3px;
   }
-
-
-  /*
-    Optionally: If :focus-visible is supported on this
-    platform, provide enhanced focus styles for keyboard
-    focus.
-  */
   :focus-visible {
     outline: 2px dashed var(--green);
     outline-offset: 3px;
@@ -63,7 +53,7 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: #e3f2fd;
+    background-color: whitesmoke;
     color: #42a5f5;
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
@@ -158,15 +148,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.1;
   }
 
-  .big-heading {
-    margin: 0;
-    font-size: clamp(40px, 8vw, 80px);
-  }
 
-  .medium-heading {
-    margin: 0;
-    font-size: clamp(40px, 8vw, 60px);
-  }
 
   .numbered-heading {
     display: flex;
@@ -266,81 +248,6 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
     border-radius: 0;
   }
-
-  input, textarea {
-    border-radius: 0;
-    outline: 0;
-
-    &:focus {
-      outline: 0;
-    }
-    &:focus,
-    &:active {
-      &::placeholder {
-        opacity: 0.5;
-      }
-    }
-  }
-
-  p {
-    margin: 0 0 15px 0;
-
-    &:last-child,
-    &:last-of-type {
-      margin: 0;
-    }
-
-    & > a {
-      ${({ theme }) => theme.mixins.inlineLink};
-    }
-
-  }
-
-  ul {
-    &.fancy-list {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      font-size: var(--fz-lg);
-      li {
-        position: relative;
-        padding-left: 30px;
-        margin-bottom: 10px;
-        &:before {
-          content: '▹';
-          position: absolute;
-          left: 0;
-          color: #42a5f5;
-        }
-      }
-    }
-  }
-
-  blockquote {
-    border-left-color: #42a5f5;
-    border-left-style: solid;
-    border-left-width: 1px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left: 1.5rem;
-
-    p {
-      font-style: italic;
-      font-size: 24px;
-    }
-  }
-
-  hr {
-    background-color: var(--lightest-navy);
-    height: 1px;
-    border-width: 0px;
-    border-style: initial;
-    border-color: initial;
-    border-image: initial;
-    margin: 1rem;
-  }
-
-
 
   .overline {
     color: #42a5f5;

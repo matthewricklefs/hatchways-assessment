@@ -27,6 +27,7 @@ const button = css`
 const mixins = {
   flexCenter: css`
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
   `,
