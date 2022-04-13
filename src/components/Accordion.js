@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import Chevron from './Chevron';
+
 import './Accordion.css';
 
-function Accordion({ data, index }) {
+function Accordion({ grades }) {
   const [active, setActive] = useState('');
   const [height, setHeight] = useState('0px');
   const [rotate, setRotate] = useState('accordion__icon');
@@ -36,8 +37,8 @@ function Accordion({ data, index }) {
         >
           <div className="student-overline">
             <ul className="student-grade-list">
-              {data.map((grade, i) => (
-                <li key={index}>
+              {grades.map((grade, i) => (
+                <li key={i}>
                   <span>Test {i}:</span> {grade}
                 </li>
               ))}
