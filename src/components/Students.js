@@ -10,17 +10,6 @@ const StyledStudentsGrid = styled.ul`
     position: relative;
     z-index: 1;
   }
-
-  display: grid;
-  grid-template-columns: min-content 33% 1fr 1fr 1fr;
-  grid-template-rows: min-content, 1fr 1fr;
-  grid-gap: 10px;
-  grid-template-areas:
-    'avatar name name name expandBtn'
-    'avatar content content . .'
-    '. content content . .';
-  padding: 16px;
-  border-bottom: 1px solid lightgrey;
 `;
 
 const StyledStudent = styled.li`
@@ -237,6 +226,7 @@ function Students({
   company,
   skill,
   grades,
+  average,
   tags,
   addTag,
 }) {
@@ -261,14 +251,18 @@ function Students({
                 {email}
               </p>
 
-              <h5>
+              <h4>
                 <span className="student-overline">Company: </span>
                 {company}
+              </h4>
+
+              <h5>
+                <span className="student-overline">Skill: </span>
+                {skill}
               </h5>
 
               <h6>
-                <span className="student-overline">Skill: </span>
-                {skill}
+                <span className="student-overline">Average: {average}%</span>
               </h6>
 
               <Accordion grades={grades} />

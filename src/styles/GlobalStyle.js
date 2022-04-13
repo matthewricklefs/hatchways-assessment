@@ -5,6 +5,7 @@ import TransitionStyles from './TransitionStyles';
 const GlobalStyle = createGlobalStyle`
   ${variables};
 
+
   html {
     box-sizing: border-box;
     width: 100%;

@@ -88,6 +88,16 @@ function App() {
     }
   };
 
+  const findAverage = (array) => {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+      sum += parseInt(array[i]);
+    }
+
+    let average = sum / array.length;
+    return average;
+  };
+
   const API = 'https://api.hatchways.io/assessment/students';
 
   async function fetchStudents(url) {
@@ -130,6 +140,8 @@ function App() {
         />
 
         {filteredData.map((student, index) => {
+          const average = findAverage(student.grades);
+
           return (
             <Students
               key={index.toString()}
@@ -141,6 +153,7 @@ function App() {
               company={student.company}
               skill={student.skill}
               grades={student.grades}
+              average={average}
               tags={student.tags}
               addTag={addTag}
             />
